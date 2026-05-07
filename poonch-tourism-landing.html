@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poonch Tourism — Explore the Hidden Gem of J&K</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#060a0d;
+  --surface:#0c1318;
+  --card:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+  --border2:rgba(255,255,255,0.14);
+  --teal:#00e5c3;
+  --teal2:#00b89a;
+  --sky:#38c0f5;
+  --forest:#1a7a56;
+  --warm:#f5c87a;
+  --peach:#f09c6b;
+  --text:#eef4f0;
+  --muted:rgba(238,244,240,0.55);
+  --dim:rgba(238,244,240,0.28);
+  --head:'Unbounded',sans-serif;
+  --body:'Instrument Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--body);
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* NOISE TEXTURE */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.35;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(6,10,13,0.7);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--head);font-size:14px;font-weight:900;
+  letter-spacing:0.02em;
+  background:linear-gradient(135deg,var(--teal),var(--sky));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{
+  font-size:13px;font-weight:500;color:var(--muted);
+  text-decoration:none;letter-spacing:0.03em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{
+  background:linear-gradient(135deg,var(--teal2),var(--sky));
+  color:#060a0d!important;font-weight:700!important;
+  padding:9px 22px;border-radius:100px;
+  font-size:12.5px!important;letter-spacing:0.05em;
+  transition:opacity 0.2s,transform 0.2s!important;
+}
+.nav-cta:hover{opacity:0.88;transform:translateY(-1px);}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  padding:140px 40px 80px;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,229,195,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(56,192,245,0.1) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(26,122,86,0.15) 0%, transparent 50%);
+  pointer-events:none;
+}
+/* floating orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:drift 12s ease-in-out infinite alternate;}
+.orb1{width:420px;height:420px;background:rgba(0,229,195,0.07);top:-100px;left:-80px;animation-delay:0s;}
+.orb2{width:320px;height:320px;background:rgba(56,192,245,0.09);bottom:-60px;right:-60px;animation-delay:-4s;}
+.orb3{width:200px;height:200px;background:rgba(245,200,122,0.06);top:40%;left:60%;animation-delay:-8s;}
+@keyframes drift{from{transform:translate(0,0) scale(1);}to{transform:translate(30px,20px) scale(1.05);}}
+
+.hero-inner{
+  max-width:1100px;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  position:relative;z-index:1;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,229,195,0.08);
+  border:1px solid rgba(0,229,195,0.2);
+  border-radius:100px;
+  padding:6px 16px;
+  font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:24px;
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero-h1{
+  font-family:var(--head);
+  font-size:clamp(36px,4vw,58px);
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:-0.02em;
+  margin-bottom:20px;
+}
+.hero-h1 .hl{
+  background:linear-gradient(135deg,var(--teal),var(--sky));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:16px;line-height:1.65;
+  color:var(--muted);margin-bottom:36px;
+  max-width:440px;
+}
+.cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--teal2),var(--sky));
+  color:#060a0d;font-weight:700;
+  padding:14px 28px;border-radius:14px;
+  font-size:14px;text-decoration:none;
+  letter-spacing:0.02em;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 0 40px rgba(0,229,195,0.25);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 50px rgba(0,229,195,0.35);}
+.btn-primary svg{width:18px;height:18px;flex-shrink:0;}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--card);border:1px solid var(--border2);
+  color:var(--text);font-weight:500;
+  padding:14px 24px;border-radius:14px;
+  font-size:14px;text-decoration:none;
+  transition:background 0.2s,border-color 0.2s;
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.2);}
+.hero-stats{
+  display:flex;gap:28px;margin-top:44px;
+  padding-top:32px;border-top:1px solid var(--border);
+}
+.hero-stat .val{
+  font-family:var(--head);font-size:26px;font-weight:900;
+  background:linear-gradient(135deg,var(--teal),var(--sky));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;
+}
+.hero-stat .lbl{font-size:11.5px;color:var(--dim);font-weight:500;letter-spacing:0.05em;margin-top:2px;}
+
+/* PHONE MOCKUP */
+.phone-wrap{
+  display:flex;justify-content:center;align-items:center;
+  position:relative;
+}
+.phone-glow{
+  position:absolute;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(0,229,195,0.15) 0%,transparent 70%);
+  border-radius:50%;
+}
+.phone{
+  width:240px;
+  background:linear-gradient(160deg,#141f1a,#0c1318);
+  border:2px solid rgba(255,255,255,0.12);
+  border-radius:40px;
+  padding:12px;
+  box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04),inset 0 1px 0 rgba(255,255,255,0.08);
+  position:relative;z-index:1;
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.phone-notch{
+  width:80px;height:22px;background:#060a0d;
+  border-radius:0 0 16px 16px;margin:0 auto 10px;
+}
+.phone-screen{
+  background:var(--surface);border-radius:30px;overflow:hidden;
+  aspect-ratio:9/19.5;
+  display:flex;flex-direction:column;
+}
+.phone-header{
+  background:linear-gradient(160deg,#0d2218,#0f1f2e);
+  padding:16px 14px 10px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.ph-brand{font-family:var(--head);font-size:9px;font-weight:900;color:var(--teal);letter-spacing:0.06em;}
+.ph-title{font-family:var(--head);font-size:14px;font-weight:900;color:var(--text);line-height:1.2;}
+.ph-sub{font-size:8px;color:var(--dim);}
+.ph-search{
+  background:rgba(255,255,255,0.06);border-radius:8px;
+  padding:7px 10px;display:flex;align-items:center;gap:5px;
+  margin-top:6px;
+}
+.ph-search span{font-size:8px;color:var(--dim);}
+.ph-cats{
+  display:flex;gap:6px;padding:10px 14px;overflow:hidden;
+}
+.ph-cat{
+  background:rgba(0,229,195,0.1);border:1px solid rgba(0,229,195,0.2);
+  border-radius:20px;padding:4px 10px;
+  font-size:7.5px;font-weight:600;color:var(--teal);white-space:nowrap;
+}
+.ph-cat.active{background:var(--teal);color:#060a0d;}
+.ph-cards{display:flex;flex-direction:column;gap:8px;padding:0 14px 14px;}
+.ph-card{
+  background:rgba(255,255,255,0.05);border-radius:14px;
+  overflow:hidden;border:1px solid rgba(255,255,255,0.07);
+}
+.ph-card-img{
+  height:60px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;letter-spacing:0.04em;color:rgba(255,255,255,0.6);
+  position:relative;overflow:hidden;
+}
+.ph-card-img::before{
+  content:'';position:absolute;inset:0;
+}
+.ph-ci-1{background:linear-gradient(135deg,#1a5c3a,#0d7c6e);}
+.ph-ci-2{background:linear-gradient(135deg,#0a3a5c,#1a5c82);}
+.ph-ci-3{background:linear-gradient(135deg,#5c3a1a,#7c5c0d);}
+.ph-card-body{padding:7px 10px;}
+.ph-card-name{font-size:9px;font-weight:700;color:var(--text);}
+.ph-card-meta{font-size:7px;color:var(--dim);margin-top:1px;}
+.ph-rating{color:var(--warm);font-size:7px;margin-top:2px;}
+
+/* FEATURES */
+.features{
+  padding:100px 40px;
+  max-width:1100px;margin:0 auto;
+}
+.section-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:16px;
+}
+.section-tag::before{content:'';display:block;width:20px;height:2px;background:var(--teal);border-radius:2px;}
+.section-h2{
+  font-family:var(--head);
+  font-size:clamp(28px,3.5vw,44px);font-weight:900;
+  line-height:1.1;letter-spacing:-0.02em;
+  margin-bottom:12px;
+}
+.section-sub{
+  font-size:16px;color:var(--muted);line-height:1.6;
+  max-width:520px;margin-bottom:60px;
+}
+.features-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.feat-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;padding:28px;
+  transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+  position:relative;overflow:hidden;
+}
+.feat-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 0% 0%,rgba(0,229,195,0.07) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.3s;pointer-events:none;
+}
+.feat-card:hover{border-color:rgba(0,229,195,0.25);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.feat-card:hover::before{opacity:1;}
+.feat-icon{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;font-size:22px;
+}
+.feat-icon.green{background:rgba(0,229,195,0.1);border:1px solid rgba(0,229,195,0.2);}
+.feat-icon.sky{background:rgba(56,192,245,0.1);border:1px solid rgba(56,192,245,0.2);}
+.feat-icon.warm{background:rgba(245,200,122,0.1);border:1px solid rgba(245,200,122,0.2);}
+.feat-icon.peach{background:rgba(240,156,107,0.1);border:1px solid rgba(240,156,107,0.2);}
+.feat-icon.purple{background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);}
+.feat-icon.forest{background:rgba(26,122,86,0.15);border:1px solid rgba(26,122,86,0.3);}
+.feat-h3{font-family:var(--head);font-size:15px;font-weight:700;margin-bottom:8px;}
+.feat-p{font-size:13.5px;color:var(--muted);line-height:1.6;}
+
+/* PLACES SHOWCASE */
+.places{
+  padding:80px 40px;
+  background:linear-gradient(180deg,transparent,rgba(0,229,195,0.03),transparent);
+}
+.places-inner{max-width:1100px;margin:0 auto;}
+.places-scroll{
+  display:flex;gap:18px;overflow-x:auto;padding:10px 4px 20px;
+  scrollbar-width:none;
+}
+.places-scroll::-webkit-scrollbar{display:none;}
+.place-card{
+  flex-shrink:0;width:220px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;overflow:hidden;
+  transition:transform 0.25s,border-color 0.25s;
+}
+.place-card:hover{transform:translateY(-6px);border-color:rgba(0,229,195,0.25);}
+.place-img{
+  height:130px;display:flex;align-items:flex-end;
+  padding:12px;position:relative;
+}
+.place-img::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(6,10,13,0.8),transparent 60%);
+}
+.place-p1{background:linear-gradient(135deg,#1a4a2a,#0d6e5a);}
+.place-p2{background:linear-gradient(135deg,#0a2e4a,#0d5a7c);}
+.place-p3{background:linear-gradient(135deg,#3a2a0a,#5c480d);}
+.place-p4{background:linear-gradient(135deg,#1a0a3a,#3a1a6e);}
+.place-p5{background:linear-gradient(135deg,#2a1a0a,#5a3a0d);}
+.place-emoji{font-size:28px;position:absolute;top:12px;left:12px;}
+.place-name-overlay{font-family:var(--head);font-size:12px;font-weight:700;color:#fff;position:relative;z-index:1;line-height:1.2;}
+.place-body{padding:12px 14px;}
+.place-meta{font-size:11.5px;color:var(--dim);}
+.place-rating{display:flex;align-items:center;gap:4px;margin-top:6px;font-size:11px;color:var(--warm);font-weight:600;}
+
+/* DOWNLOAD */
+.download{
+  padding:100px 40px;
+  position:relative;overflow:hidden;
+}
+.download-inner{
+  max-width:860px;margin:0 auto;text-align:center;
+  background:linear-gradient(135deg,rgba(0,229,195,0.06),rgba(56,192,245,0.06));
+  border:1px solid rgba(0,229,195,0.15);
+  border-radius:40px;padding:80px 60px;
+  position:relative;
+}
+.download-inner::before{
+  content:'';position:absolute;
+  top:-1px;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--teal),transparent);
+}
+.download-inner::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,229,195,0.1) 0%,transparent 60%);
+  pointer-events:none;border-radius:40px;
+}
+.download-tag{
+  display:inline-block;
+  background:rgba(0,229,195,0.1);border:1px solid rgba(0,229,195,0.25);
+  border-radius:100px;padding:6px 18px;
+  font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:22px;position:relative;z-index:1;
+}
+.download-h2{
+  font-family:var(--head);
+  font-size:clamp(30px,4vw,50px);font-weight:900;
+  line-height:1.1;letter-spacing:-0.02em;
+  margin-bottom:16px;position:relative;z-index:1;
+}
+.download-sub{
+  font-size:16px;color:var(--muted);line-height:1.6;
+  margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;
+  position:relative;z-index:1;
+}
+.store-btns{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  position:relative;z-index:1;
+}
+.store-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--text);color:#060a0d;
+  padding:14px 28px;border-radius:16px;
+  text-decoration:none;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.1);
+}
+.store-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+.store-btn svg{width:28px;height:28px;flex-shrink:0;}
+.store-btn-text .top{font-size:10px;font-weight:500;opacity:0.6;letter-spacing:0.06em;display:block;}
+.store-btn-text .name{font-family:var(--head);font-size:16px;font-weight:900;display:block;letter-spacing:-0.01em;}
+.store-btn.outlined{
+  background:transparent;color:var(--text);
+  border:1.5px solid var(--border2);
+}
+.store-btn.outlined:hover{border-color:rgba(255,255,255,0.3);}
+
+/* HOW IT WORKS */
+.hiw{padding:100px 40px;}
+.hiw-inner{max-width:1100px;margin:0 auto;}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px;}
+.step{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:24px;padding:28px 22px;
+  position:relative;
+}
+.step-num{
+  font-family:var(--head);
+  font-size:48px;font-weight:900;
+  color:rgba(0,229,195,0.08);
+  position:absolute;top:16px;right:20px;
+  line-height:1;
+}
+.step-icon{font-size:28px;margin-bottom:16px;display:block;}
+.step-h{font-family:var(--head);font-size:14px;font-weight:700;margin-bottom:8px;}
+.step-p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* FOOTER */
+footer{
+  padding:60px 40px 40px;
+  border-top:1px solid var(--border);
+  max-width:1100px;margin:0 auto;
+}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;flex-wrap:wrap;gap:32px;}
+.footer-brand .logo{
+  font-family:var(--head);font-size:16px;font-weight:900;
+  background:linear-gradient(135deg,var(--teal),var(--sky));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:10px;
+}
+.footer-brand p{font-size:13px;color:var(--muted);max-width:240px;line-height:1.6;}
+.footer-links{display:flex;gap:48px;flex-wrap:wrap;}
+.footer-col h4{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+.footer-col a{display:block;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:10px;transition:color 0.2s;}
+.footer-col a:hover{color:var(--text);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:28px;border-top:1px solid var(--border);
+  font-size:12.5px;color:var(--dim);flex-wrap:wrap;gap:10px;
+}
+.footer-bottom a{color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.footer-bottom a:hover{color:var(--muted);}
+.made-in{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);}
+.flag{font-size:14px;}
+
+/* SCROLL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:120px 20px 60px;}
+  .hero-inner{grid-template-columns:1fr;gap:50px;text-align:center;}
+  .hero-sub{max-width:100%;}
+  .cta-row{justify-content:center;}
+  .hero-stats{justify-content:center;}
+  .phone-wrap{order:-1;}
+  .features{padding:60px 20px;}
+  .features-grid{grid-template-columns:1fr 1fr;gap:14px;}
+  .places{padding:60px 20px;}
+  .hiw{padding:60px 20px;}
+  .steps{grid-template-columns:1fr 1fr;gap:14px;}
+  .download{padding:60px 20px;}
+  .download-inner{padding:50px 28px;}
+  footer{padding:50px 20px 32px;}
+  .footer-top{flex-direction:column;}
+}
+@media(max-width:600px){
+  .features-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">POONCH TOURISM</div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#places">Places</a>
+    <a href="#how">How It Works</a>
+    <a href="poonch-tourism-privacy.html">Privacy</a>
+    <a href="#download" class="nav-cta">Download App</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">🏔️ Now available on Android</div>
+      <h1 class="hero-h1">Explore <span class="hl">Poonch</span> like never before</h1>
+      <p class="hero-sub">Your pocket guide to the hidden gem of Jammu & Kashmir. Discover breathtaking landscapes, ancient forts, serene lakes, and local experiences — all in one app.</p>
+      <div class="cta-row">
+        <a href="https://play.google.com/store/apps/details?id=com.programiner.poonchtourism" class="btn-primary" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.41.23.87.24 1.29.04l12.81-7.4-2.79-2.79-11.31 10.15zm-1.46-20.1a1.74 1.74 0 0 0-.72 1.47v17.73c0 .62.26 1.14.72 1.47L2.6 24l9.92-9.92v-.23L2.6 3.67l-.88-.01zM21.54 10.5l-2.61-1.51-3.12 3.12 3.12 3.12 2.64-1.53c.75-.43.75-1.14.0-1.58l-.03-.02v.4zm-7.94 4.81L2.6 24l11.31-10.15 2.79 2.79L13.6 15.31z"/></svg>
+          Get it on Play Store
+        </a>
+        <a href="#features" class="btn-secondary">
+          See Features →
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="val">50+</span><span class="lbl">Tourist Spots</span></div>
+        <div class="hero-stat"><span class="val">10+</span><span class="lbl">Categories</span></div>
+        <div class="hero-stat"><span class="val">Free</span><span class="lbl">Forever</span></div>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone-glow"></div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="ph-brand">POONCH TOURISM</div>
+            <div class="ph-title">Discover Hidden Gems ✦</div>
+            <div class="ph-sub">Poonch, J&K — 53 places</div>
+            <div class="ph-search">
+              <span style="font-size:9px;opacity:0.4;">🔍</span>
+              <span>Search places, forts, lakes…</span>
+            </div>
+          </div>
+          <div class="ph-cats">
+            <div class="ph-cat active">All</div>
+            <div class="ph-cat">🏔️ Nature</div>
+            <div class="ph-cat">🏰 Forts</div>
+            <div class="ph-cat">💧 Lakes</div>
+          </div>
+          <div class="ph-cards">
+            <div class="ph-card">
+              <div class="ph-card-img ph-ci-1">
+                <span style="position:relative;z-index:1;font-size:9px;font-weight:700;color:rgba(255,255,255,0.9)">🌿 Banjosa Lake</span>
+              </div>
+              <div class="ph-card-body">
+                <div class="ph-card-name">Banjosa Lake</div>
+                <div class="ph-card-meta">12.5 km from Rawalakot</div>
+                <div class="ph-rating">★★★★★ 4.8</div>
+              </div>
+            </div>
+            <div class="ph-card">
+              <div class="ph-card-img ph-ci-2">
+                <span style="position:relative;z-index:1;font-size:9px;font-weight:700;color:rgba(255,255,255,0.9)">🏰 Poonch Fort</span>
+              </div>
+              <div class="ph-card-body">
+                <div class="ph-card-name">Poonch Fort</div>
+                <div class="ph-card-meta">Heritage • City Center</div>
+                <div class="ph-rating">★★★★☆ 4.5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="reveal">
+    <div class="section-tag">What we offer</div>
+    <h2 class="section-h2">Everything you need to<br>explore Poonch</h2>
+    <p class="section-sub">We built this app because Poonch deserves way more love. Every feature is crafted to make your trip unforgettable.</p>
+  </div>
+  <div class="features-grid reveal">
+    <div class="feat-card">
+      <div class="feat-icon green">🗺️</div>
+      <h3 class="feat-h3">Interactive Place Explorer</h3>
+      <p class="feat-p">Browse 50+ curated tourist spots with rich descriptions, photos, ratings, and best times to visit.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon sky">📍</div>
+      <h3 class="feat-h3">Google Maps Integration</h3>
+      <p class="feat-p">One tap to open directions to any place. Never get lost in the mountains again.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon warm">📅</div>
+      <h3 class="feat-h3">Best Months to Visit</h3>
+      <p class="feat-p">Know exactly when to visit each place — whether it's snowcapped winters or blooming springs.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon peach">💡</div>
+      <h3 class="feat-h3">Local Tips & Tricks</h3>
+      <p class="feat-p">Insider tips from locals — what to carry, what to avoid, hidden viewpoints and secret trails.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon purple">🏷️</div>
+      <h3 class="feat-h3">Category Browsing</h3>
+      <p class="feat-p">Filter by Lakes, Forts, Nature Trails, Religious Sites, Waterfalls and more categories.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon forest">⭐</div>
+      <h3 class="feat-h3">Ratings & Reviews</h3>
+      <p class="feat-p">Community-driven ratings help you pick the best spots that match your vibe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLACES SHOWCASE -->
+<section class="places" id="places">
+  <div class="places-inner">
+    <div class="reveal">
+      <div class="section-tag">Top Destinations</div>
+      <h2 class="section-h2">Poonch's most iconic spots</h2>
+      <p class="section-sub">From misty mountain lakes to centuries-old forts — here's a taste of what's waiting.</p>
+    </div>
+    <div class="places-scroll reveal">
+      <div class="place-card">
+        <div class="place-img place-p1">
+          <div class="place-emoji">🌊</div>
+          <div class="place-name-overlay">Banjosa Lake</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">Nature · 12.5 km</div>
+          <div class="place-rating">★★★★★ 4.8</div>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img place-p2">
+          <div class="place-emoji">🏰</div>
+          <div class="place-name-overlay">Poonch Fort</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">Heritage · City Center</div>
+          <div class="place-rating">★★★★☆ 4.5</div>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img place-p3">
+          <div class="place-emoji">⛰️</div>
+          <div class="place-name-overlay">Toli Peer</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">Mountain · 42 km</div>
+          <div class="place-rating">★★★★★ 4.9</div>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img place-p4">
+          <div class="place-emoji">🕌</div>
+          <div class="place-name-overlay">Ziarat Sahib</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">Religious · 5 km</div>
+          <div class="place-rating">★★★★☆ 4.6</div>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img place-p5">
+          <div class="place-emoji">🌲</div>
+          <div class="place-name-overlay">Noori Top</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">Nature · 38 km</div>
+          <div class="place-rating">★★★★★ 4.7</div>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img place-p1">
+          <div class="place-emoji">💦</div>
+          <div class="place-name-overlay">Peer Gali</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">Waterfall · 28 km</div>
+          <div class="place-rating">★★★★☆ 4.4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw" id="how">
+  <div class="hiw-inner">
+    <div class="reveal">
+      <div class="section-tag">How it works</div>
+      <h2 class="section-h2">Start exploring in seconds</h2>
+      <p class="section-sub">No sign-up needed. Just download and go.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <span class="step-icon">📲</span>
+        <div class="step-h">Download Free</div>
+        <p class="step-p">Grab the app from Google Play Store — it's completely free, no subscription.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <span class="step-icon">🗂️</span>
+        <div class="step-h">Browse Categories</div>
+        <p class="step-p">Filter places by type — lakes, forts, trails, shrines, viewpoints and more.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <span class="step-icon">📍</span>
+        <div class="step-h">Pick Your Spot</div>
+        <p class="step-p">Read details, check best months, read tips and tap for directions.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <span class="step-icon">🏕️</span>
+        <div class="step-h">Go Explore!</div>
+        <p class="step-p">Head out and experience Poonch's magic. Share your experience with the community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD CTA -->
+<section class="download" id="download">
+  <div class="download-inner">
+    <div class="download-tag">📱 Available on Android</div>
+    <h2 class="download-h2">Your next adventure starts<br>in Poonch</h2>
+    <p class="download-sub">Download Poonch Tourism for free. No ads, no paywalls. Just pure exploration.</p>
+    <div class="store-btns">
+      <a href="https://play.google.com/store/apps/details?id=com.programiner.poonchtourism" target="_blank" class="store-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.41.23.87.24 1.29.04l12.81-7.4-2.79-2.79-11.31 10.15zm-1.46-20.1a1.74 1.74 0 0 0-.72 1.47v17.73c0 .62.26 1.14.72 1.47L2.6 24l9.92-9.92v-.23L2.6 3.67l-.88-.01zM21.54 10.5l-2.61-1.51-3.12 3.12 3.12 3.12 2.64-1.53c.75-.43.75-1.14.0-1.58l-.03-.02v.4zm-7.94 4.81L2.6 24l11.31-10.15 2.79 2.79L13.6 15.31z"/></svg>
+        <div class="store-btn-text">
+          <span class="top">GET IT ON</span>
+          <span class="name">Google Play</span>
+        </div>
+      </a>
+      <a href="#" class="store-btn outlined">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="opacity:0.4"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="store-btn-text">
+          <span class="top">COMING SOON TO</span>
+          <span class="name">App Store</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">POONCH TOURISM</div>
+      <p>Showcasing the beauty of Poonch, Jammu & Kashmir. Built with love for the people of Poonch and every traveler who wants to discover it.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>App</h4>
+        <a href="https://play.google.com/store/apps/details?id=com.programiner.poonchtourism" target="_blank">Download</a>
+        <a href="#features">Features</a>
+        <a href="#places">Places</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="poonch-tourism-privacy.html">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:teamprograminer@gmail.com">Contact Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="made-in"><span class="flag">🇮🇳</span> Made with ❤️ in Poonch, J&K</div>
+    <div>© 2025 Poonch Tourism. All rights reserved.</div>
+    <a href="poonch-tourism-privacy.html">Privacy Policy</a>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
